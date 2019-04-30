@@ -141,6 +141,7 @@ QUnit.module("file", function () {
         _actualTestFileDataGetters.testGetter(opts, "nodebuffer");
         _actualTestFileDataGetters.testGetter(opts, "blob");
         _actualTestFileDataGetters.testGetter(opts, "unknown");
+        _actualTestFileDataGetters.testGetter(opts, null);
 
         stop();
         opts.zip.generateAsync({type:"binarystring"})
@@ -162,6 +163,7 @@ QUnit.module("file", function () {
             _actualTestFileDataGetters.testGetter(reloaded, "nodebuffer");
             _actualTestFileDataGetters.testGetter(reloaded, "blob");
             _actualTestFileDataGetters.testGetter(reloaded, "unknown");
+            _actualTestFileDataGetters.testGetter(reloaded, null);
 
             opts.zip.file("file.txt", "changing the content after the call won't change the result");
             start();
@@ -253,6 +255,10 @@ QUnit.module("file", function () {
         assert_unknown : function (opts, err, buffer, testName) {
             equal(buffer, null, testName + "no data");
             ok(err.message.match("not supported by this platform"), testName + "the error message is useful");
+        },
+        assert_null : function (opts, err, buffer, testName) {
+            equal(buffer, null, testName + "no data");
+            ok(err.message.match("No output type specified"), testName + "the error message is useful");
         }
     };
 
@@ -345,7 +351,7 @@ QUnit.module("file", function () {
             ok(false, "An unsupported object was added, but no exception thrown");
         }, function (e) {
             start();
-            ok(e.message.match("unsupported format"), "the error message is useful");
+            ok(e.message.match("Is it in a supported JavaScript type"), "the error message is useful");
         });
     });
 
@@ -709,7 +715,7 @@ QUnit.module("file", function () {
             assert.equal(content, "Bonjour tout le monde!\n", "Exact match found");
             start();
         })['catch'](JSZipTestUtils.assertNoError);
-        assert.equal(zip.file("Readme.Deutch"), null, "Match exactly nothing");
+        assert.equal(zip.file("Readme.Deutsch"), null, "Match exactly nothing");
         assert.equal(zip.file(/Readme\../).length, 2, "Match regex free text");
         assert.equal(zip.file(/pirate/i).length, 1, "Match regex 1 result");
     });
