@@ -1,7 +1,7 @@
 /* jshint qunit: true */
 /* global JSZip,JSZipTestUtils */
 'use strict';
-var SyncPromise = require("../../../lib/promise/SyncPromise").SyncPromise;
+var SyncPromise = require("../../lib/promise/SyncPromise").SyncPromise;
 
 QUnit.module("SyncPromise");
 
@@ -16,7 +16,7 @@ test("Rejecting a promise", function(assert) {
     var promise = new SyncPromise(function(resolve, reject){
         reject("nok");
     });
-    promise.get();
+    promise.result();
     assert.ok("nok"===promise.error());
 });
 
