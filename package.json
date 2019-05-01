@@ -1,6 +1,6 @@
 {
   "name": "jszip-sync",
-  "version": "3.1.3sync",
+  "version": "3.2.1-sync",
   "author": "Stuart Knightley <stuart@stuartk.com>",
   "description": "Create, read and edit .zip files with Javascript, with sync capabilities, forked from http://stuartk.com/jszip",
   "scripts": {
